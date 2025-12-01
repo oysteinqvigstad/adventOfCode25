@@ -1,32 +1,34 @@
 import java.lang.Math.floorDiv
-import kotlin.math.absoluteValue
+import kotlin.math.abs
 
 class Day01(input: List<String>) {
-    val data = input.map { parse(it) }
-    val accumulated = data.scan(50) { acc, value -> apply(acc, value) }
-    val clicks = accumulated.zip(data) { acc, value -> clicks(acc, value) }
+    private val data = input.map { parse(it) }
+    private val prefixSums = data.scan(50) { prev, distance -> rotate(prev, distance) }
 
-    val answer1 = accumulated.count { it == 0 }
-    val answer2 = clicks.sum()
+    val answer1 = prefixSums.count { it == 0 }
+    val answer2 = prefixSums.zip(data) { prev, distance -> countClicks(prev, distance) }.sum()
 
 
     fun parse(input: String): Int {
-        val value = input.substring(1).toInt()
-        return if (input[0] == 'R') value else -value
+        return input.drop(1).toInt() * if (input[0] == 'R') 1 else -1
     }
 
-    fun apply(value1: Int, value2: Int): Int {
-        return ((value1 + value2) % 100 + 100) % 100
+    /**
+     * Rotate the dial, numbered 0-99
+     */
+    fun rotate(prev: Int, distance: Int): Int {
+        return ((prev + distance) % 100 + 100) % 100
     }
 
-    fun clicks(value1: Int, value2: Int): Int {
-        val start = floorDiv(value1, 100)
-        val end = floorDiv(value1 + value2, 100)
-        var diff = (end - start).absoluteValue
-        if (value2 < 0) {
-            if (apply(value1, value2) == 0) diff++
-            if (value1 == 0) diff--
-        }
+    /**
+     * Count how many clicks (dial at pos 0), either by ending on 0, or rotating beyond it.
+     * @note edge case (a): going counter-clockwise and ending on 0
+     * @note edge case (b): going counter-clockwise and starting on 0
+     */
+    fun countClicks(prev: Int, distance: Int): Int {
+        var diff = abs(floorDiv(prev + distance, 100) - floorDiv(prev, 100))
+        if (distance < 0 && rotate(prev, distance) == 0) diff++  // (a)
+        if (distance < 0 && prev == 0) diff--                    // (b)
         return diff
     }
 }
