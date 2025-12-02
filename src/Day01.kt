@@ -9,16 +9,14 @@ class Day01(input: List<String>) {
     val answer2 = prefixSums.zip(data) { prev, distance -> countClicks(prev, distance) }.sum()
 
 
-    fun parse(input: String): Int {
-        return input.drop(1).toInt() * if (input[0] == 'R') 1 else -1
-    }
+    fun parse(input: String): Int =
+        input.drop(1).toInt() * if (input[0] == 'R') 1 else -1
 
     /**
      * Rotate the dial, numbered 0-99
      */
-    fun rotate(prev: Int, distance: Int): Int {
-        return ((prev + distance) % 100 + 100) % 100
-    }
+    fun rotate(prev: Int, distance: Int): Int =
+        (prev + distance).mod(100)
 
     /**
      * Count how many clicks (dial at pos 0), either by ending on 0, or rotating beyond it.
