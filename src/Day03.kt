@@ -7,12 +7,12 @@ class Day03(input: List<String>) {
      * by activating k batteries (from left to right)
      */
     fun rating(batteries: String, k: Int): Long {
+        var joltage: Long = 0
         var start = 0
-        var result = ""
         for (end in batteries.length-k+1 .. batteries.length) {
             start = (start until end).maxBy { batteries[it] } + 1
-            result += batteries[start-1]
+            joltage = joltage * 10 + batteries[start-1].digitToInt()
         }
-        return result.toLong()
+        return joltage
     }
 }
