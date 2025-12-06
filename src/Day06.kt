@@ -26,7 +26,7 @@ class Day06(input: List<String>) {
      * Compute group by transposing digit values first
      */
     fun computeVertically(values: List<String>, op: Op) : Long =
-        (0 until values.first().length)
+        values.first().indices
             .map { col -> values.map { it[col] }.joinToString("") }
             .run { computeHorizontally(this, op) }
 
@@ -35,7 +35,7 @@ class Day06(input: List<String>) {
      * by selecting the size of the value with the largest width
      */
     fun getColumnWidths(table: List<List<String>>): List<Int> =
-        (0 until table.first().size)
+        table.first().indices
             .map { col -> (0 until table.size).maxOf { row -> table[row][col].length } }
 
 
