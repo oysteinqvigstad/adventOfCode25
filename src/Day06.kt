@@ -20,10 +20,10 @@ class Day06(input: List<String>) {
      * Calculate group by applying operator to each number
      */
     fun computeHorizontally(values: List<String>, op: Op) : Long =
-        values.map { s -> s.trim().toLong() }.reduce { a, b -> op(a, b) }
+        values.map { s -> s.trim().toLong() }.reduce(op)
 
     /**
-     * Compute group by transposing digit values first
+     * Calculate group by transposing digit values first
      */
     fun computeVertically(values: List<String>, op: Op) : Long =
         values.first().indices
@@ -35,8 +35,7 @@ class Day06(input: List<String>) {
      * by selecting the size of the value with the largest width
      */
     fun getColumnWidths(table: List<List<String>>): List<Int> =
-        table.first().indices
-            .map { col -> (0 until table.size).maxOf { row -> table[row][col].length } }
+        table.first().indices.map { col -> (0 until table.size).maxOf { row -> table[row][col].length } }
 
 
     fun makeOperator(token: String): Op = when (token) {
