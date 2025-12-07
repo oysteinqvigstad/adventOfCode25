@@ -1,9 +1,9 @@
 import java.io.File
 
 fun main() {
-    val input = File("inputs/input06.txt").readLines()
+    val input = File("inputs/input07.txt").readLines()
 
-    Day06(input).also {
+    Day07(input).also {
         println(it.answer1)
         println(it.answer2)
     }

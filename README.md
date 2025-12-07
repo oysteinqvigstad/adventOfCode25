@@ -15,7 +15,7 @@
                                   /  ;{};  \              4. Printing Deptartment ✔
                                  / "  ;  *  \             5. Cafeteria ✔          
                                 /; []  *  {};\            6. Trash Compactor ✔
-                               /  * ;  {} ;   \           7.
+                               /  * ;  {} ;   \           7. Laboratories ✔
                               /;  {}  +  ;  {};\          8. 
                              / * ;  {} *  ; <>  \         9.   
                             /{}  *  ; {}  *  {}; \       10.
