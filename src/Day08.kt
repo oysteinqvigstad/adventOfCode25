@@ -8,8 +8,7 @@ class Day08(val input: List<String>) {
                       .sortedBy { it.distance }
 
     val answer1 = UnionFind(boxes).also { uf -> cables.take(1000).forEach { uf.union(it.from, it.to) } }
-                                  .components()
-                                  .values
+                                  .components().values
                                   .sortedDescending()
                                   .take(3)
                                   .reduce(Int::times)
